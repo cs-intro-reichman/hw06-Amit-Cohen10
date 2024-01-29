@@ -76,7 +76,7 @@ public class Runigram {
 	 * Returns an image which is the horizontally flipped version of the given image. 
 	 */
 	public static Color[][] flippedHorizontally(Color[][] image) {
-		Color flipped[][] = new Color[image.length][image[0].length];
+		Color[][]flipped = new Color[image.length][image[0].length];
 		for (int i=0; i<image.length; i++){
 			for (int j=0; j<image[0].length; j++){
 				flipped[i][j] = image[i][image[0].length - j - 1];
@@ -89,7 +89,7 @@ public class Runigram {
 	 * Returns an image which is the vertically flipped version of the given image. 
 	 */
 	public static Color[][] flippedVertically(Color[][] image){
-		Color flipped[][] = new Color[image.length][image[0].length];
+		Color[][]flipped = new Color[image.length][image[0].length];
 		for (int i=0; i<image.length; i++){
 			for (int j=0; j<image[0].length; j++){
 				flipped[i][j] = image[image.length - i -1][j];
@@ -111,7 +111,7 @@ public class Runigram {
 	 * Returns an image which is the grayscaled version of the given image.
 	 */
 	public static Color[][] grayScaled(Color[][] image) {
-		Color grayImage[][] = new Color[image.length][image[0].length];
+		Color[][]grayImage = new Color[image.length][image[0].length];
 		for (int i=0; i<image.length; i++){
 			for (int j=0; j<image[0].length; j++){
 				grayImage[i][j] = luminance(image[i][j]);
@@ -125,7 +125,7 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		Color scaledim[][] = new Color[image.length][image[0].length];
+		Color[][] scaledim = new Color[image.length][image[0].length];
 		double newheight = image.length / height;
 		double newwidth = image[0].length / width;
 		for (int i=0; i<image.length; i++){
@@ -173,12 +173,14 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		if(target.length != source.length || target[0].length != source[0].length){
+		if((target.length != source.length) || (target[0].length != source[0].length)){
 			target = scaled(target, source[0].length, source.length);
 		}
+		for (int i=0; i<=n; i++){
 		double alpha = (double) ((n-1) / (n));
 		display(blend(source, target, alpha));
 		StdDraw.pause(500);
+		}
 	}
 	
 	/** Creates a canvas for the given image. */
