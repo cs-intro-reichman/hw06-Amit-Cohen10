@@ -68,6 +68,7 @@ public class Runigram {
 			for (int j=0; j<image[0].length; j++){
 				print(image[i][j]);
 			}
+			System.out.println();
 		}
 	}
 	
@@ -78,7 +79,7 @@ public class Runigram {
 		Color flipped[][] = new Color[image.length][image[0].length];
 		for (int i=0; i<image.length; i++){
 			for (int j=0; j<image[0].length; j++){
-				flipped[i][j] = image[i][image.length - j - 1];
+				flipped[i][j] = image[i][image[0].length - j - 1];
 			}
 		}
 		return flipped;
@@ -101,7 +102,7 @@ public class Runigram {
 	// lum = 0.299 * r + 0.587 * g + 0.114 * b, and returns a Color object consisting
 	// the three values r = lum, g = lum, b = lum.
 	public static Color luminance(Color pixel) {
-		int lum =(int) (0.299 * pixel.getRed() + 0.587 * pixel.getGreen() + 0.144 * pixel.getBlue());
+		int lum =(int) ((0.299 * pixel.getRed()) + (0.587 * pixel.getGreen()) + (0.114 * pixel.getBlue()));
 		Color newcolor = new Color(lum, lum, lum);
 		return newcolor;
 	}
@@ -142,9 +143,9 @@ public class Runigram {
 	 * values in the two input color.
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
-		int red = (int)((c1.getRed() * alpha) * (c2.getRed() * (1 - alpha)));
-		int green = (int)((c1.getGreen() * alpha) * (c2.getGreen() * (1 - alpha)));
-		int blue = (int)((c1.getBlue() * alpha) * (c2.getBlue() * (1 - alpha)));
+		int red = (int)((c1.getRed() * alpha) + (c2.getRed() * (1 - alpha)));
+		int green = (int)((c1.getGreen() * alpha) + (c2.getGreen() * (1 - alpha)));
+		int blue = (int)((c1.getBlue() * alpha) + (c2.getBlue() * (1 - alpha)));
 		Color blender = new Color(red, green, blue);
 		return blender;
 	}
@@ -157,8 +158,8 @@ public class Runigram {
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
 		Color blender[][] = new Color[image1.length][image1[0].length];
-		for (int i=0; i<blender.length; i++){
-			for (int j=0; j<blender[0].length; j++){
+		for (int i=0; i<image1.length; i++){
+			for (int j=0; j<image1[0].length; j++){
 				blender[i][j] = blend(image1[i][j], image2[i][j], alpha);
 			}
 		}
