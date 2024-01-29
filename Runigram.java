@@ -128,8 +128,8 @@ public class Runigram {
 		Color[][] scaledim = new Color[height][width];
 		double newheight = image.length / height;
 		double newwidth = image[0].length / width;
-		for (int i=0; i<image.length; i++){
-			for (int j=0; j<image[0].length; j++){
+		for (int i=0; i<scaledim.length; i++){
+			for (int j=0; j<scaledim[0].length; j++){
 				scaledim[i][j] = image[(int)(i * newheight)][(int)(j * newwidth)];
 			}
 		}
