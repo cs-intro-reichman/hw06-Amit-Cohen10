@@ -125,7 +125,16 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		Color[][] scaledim = new Color[height][width];
+		Color[][] newImage = new Color[height][width];
+		double h = (double) image.length/height;
+		double w = (double) image[0].length/width;
+		for (int i=0 ; i<newImage.length ; i++){
+			for (int j=0 ;j<newImage[0].length ; j++){
+				newImage[i][j] = image[(int) (i*h)][(int) (j*w)];
+			}
+		}
+		return newImage;
+/* 		Color[][] scaledim = new Color[height][width];
 		double newheight = (double) (image.length / height);
 		double newwidth = (double) (image[0].length / width);
 		for (int i=0; i<scaledim.length; i++){
@@ -133,7 +142,7 @@ public class Runigram {
 				scaledim[i][j] = image[(int)(i * newheight)][(int)(j * newwidth)];
 			}
 		}
-		return scaledim;
+		return scaledim; */
 	}
 	
 	/**
